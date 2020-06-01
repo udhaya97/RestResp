@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Maapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  <mapper namespace="com.employee.dao.EmployeeMapper">
+  
+  <resultMap type="employee" id="result">
+  
+  
+  <id property ="empId" column="empId"/>
+  <result property="empName" column="empName"/>
+  <result property="sal" column="sal"/>
+   <result property="dob" column="dob"/>  
+   <result property="designation" column="designation"/>
+    <result property="companyName" column="companyName"/>
+  </resultMap>
+  <select id="getEmployeeDetail" resultType="employee" resultMap="result"> 
+  
+  
+  select * from EMPLOYEE
+  
+  
+  </select>
+  
+  <insert id="insetValues" parameterType="employee"   keyColumn="empId" useGeneratedKeys="true">
+ 
+  
+  
+  insert into employee(empId,empName,sal,designation,dob,companyName)values(#{empId},#{empName},#{sal},#{designation},#{dob},#{companyName})
+  
+  </insert>
+  
+  <!-- <insert id="insertPerson" parameterType="Person" useGeneratedKeys="true"> 
+  <selectKey keyProperty="personId" resultType="int" order="BEFORE">
+    SELECT nextVal('mySeq')
+  </selectKey>
+  INSERT INTO person (personId,PersonName) VALUES (#{personId},#{personName}) 
+</insert> -->
+
+
+  <delete id="deleteEmployee" parameterType="int">
+  
+ DELETE FROM employee WHERE empId = #{empId} 
+  
+  </delete>
+  
+  <select id="getEmployee" parameterType="int" resultType="employee" resultMap="result">
+  
+   select * from employee where empId = #{empId}
+  
+  </select>
+  <update id="updateEmployee" parameterType="employee">
+  
+  update employee set empName=#{empName},sal=#{sal},designation = #{designation},dob = #{dob},companyName=#{companyName} where empId = #{empId}
+  
+  </update>
+  
+  
+ 
+  </mapper>
